@@ -101,7 +101,7 @@ public abstract class CameraActivity extends AppCompatActivity
   private Model model = Model.QUANTIZED_EFFICIENTNET;
   private Device device = Device.CPU;
   private int numThreads = -1;
-  private TextView luca;
+  private ImageView scheda;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -126,7 +126,7 @@ public abstract class CameraActivity extends AppCompatActivity
     gestureLayout = findViewById(R.id.gesture_layout);
     sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
     bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
-    luca = findViewById(R.id.textView2);
+    scheda = findViewById(R.id.imageView);
 
     ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
     vto.addOnGlobalLayoutListener(
@@ -524,14 +524,31 @@ public abstract class CameraActivity extends AppCompatActivity
 
   @UiThread
   protected void showResultsInBottomSheet(List<Recognition> results) {
+    scheda.setImageResource(R.drawable.scheda_vuota);
+
     if (results != null && results.size() >= 3) {
       Recognition recognition = results.get(0);
       if (recognition != null) {
-        if (recognition.getTitle().equals("iPod"))
+        // ******************************** *****************************************//
+        if (recognition.getTitle().contains("bottle"))
         {
-          luca.setText("Trovato");
+          scheda.setImageResource(R.drawable.scheda);
         }
-        //luca.setText("Prova");
+        if (recognition.getTitle().contains("bucket"))
+        {
+          scheda.setImageResource(R.drawable.scheda2);
+        }
+        if (recognition.getTitle().contains("cup"))
+        {
+          scheda.setImageResource(R.drawable.scheda2);
+        }
+        if (recognition.getTitle().contains("iPod"))
+        {
+          scheda.setImageResource(R.drawable.scheda3);
+        }
+        // ******************************** *****************************************//
+
+
         if (recognition.getTitle() != null) recognitionTextView.setText(recognition.getTitle());
         if (recognition.getConfidence() != null)
           recognitionValueTextView.setText(
@@ -540,6 +557,26 @@ public abstract class CameraActivity extends AppCompatActivity
 
       Recognition recognition1 = results.get(1);
       if (recognition1 != null) {
+        // ******************************** *****************************************//
+        if (recognition1.getTitle().contains("bottle"))
+        {
+          scheda.setImageResource(R.drawable.scheda);
+        }
+        if (recognition1.getTitle().contains("bucket"))
+        {
+          scheda.setImageResource(R.drawable.scheda2);
+        }
+        if (recognition1.getTitle().contains("cup"))
+        {
+          scheda.setImageResource(R.drawable.scheda2);
+        }
+
+        if (recognition1.getTitle().contains("iPod"))
+        {
+          scheda.setImageResource(R.drawable.scheda3);
+        }
+        // ******************************** *****************************************//
+
         if (recognition1.getTitle() != null) recognition1TextView.setText(recognition1.getTitle());
         if (recognition1.getConfidence() != null)
           recognition1ValueTextView.setText(
@@ -548,6 +585,21 @@ public abstract class CameraActivity extends AppCompatActivity
 
       Recognition recognition2 = results.get(2);
       if (recognition2 != null) {
+        // ******************************** *****************************************//
+        if (recognition2.getTitle().contains("bottle"))
+        {
+          scheda.setImageResource(R.drawable.scheda);
+        }
+        if (recognition2.getTitle().contains("bucket"))
+        {
+          scheda.setImageResource(R.drawable.scheda2);
+        }
+        if (recognition2.getTitle().contains("iPod"))
+        {
+          scheda.setImageResource(R.drawable.scheda3);
+        }
+        // ******************************** *****************************************//
+
         if (recognition2.getTitle() != null) recognition2TextView.setText(recognition2.getTitle());
         if (recognition2.getConfidence() != null)
           recognition2ValueTextView.setText(
